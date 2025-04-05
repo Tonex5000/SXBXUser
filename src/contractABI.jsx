@@ -2,19 +2,6 @@ const contractABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "usdtAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "purchase",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "_usdtAddress",
 				"type": "address"
@@ -28,10 +15,87 @@ const contractABI = [
 				"internalType": "address",
 				"name": "_projectTokenAddress",
 				"type": "address"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_usdtDecimals",
+				"type": "uint8"
 			}
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint8",
+				"name": "newDecimals",
+				"type": "uint8"
+			}
+		],
+		"name": "DecimalsUpdated",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "pause",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Paused",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "usdtAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "purchase",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint8",
+				"name": "_usdtDecimals",
+				"type": "uint8"
+			}
+		],
+		"name": "setDecimals",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "setOwner",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -78,6 +142,13 @@ const contractABI = [
 		"type": "event"
 	},
 	{
+		"inputs": [],
+		"name": "unpause",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -89,6 +160,26 @@ const contractABI = [
 		],
 		"name": "USDTTransferredToOwner",
 		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Unpaused",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "withdrawRemainingTokens",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -142,7 +233,7 @@ const contractABI = [
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
+		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
@@ -189,12 +280,18 @@ const contractABI = [
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "pure",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "getTotalSupply",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getUserTokenBalance",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -239,6 +336,19 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
+		"name": "paused",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "projectToken",
 		"outputs": [
 			{
@@ -265,7 +375,7 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
-		"name": "TIER1_MAX",
+		"name": "tier1Max",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -278,20 +388,7 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
-		"name": "TIER1_MIN",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "TIER1_PRICE",
+		"name": "tier1Min",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -330,7 +427,7 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
-		"name": "TIER2_MAX",
+		"name": "tier2Max",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -343,20 +440,7 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
-		"name": "TIER2_MIN",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "TIER2_PRICE",
+		"name": "tier2Min",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -395,7 +479,7 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
-		"name": "TIER3_MAX",
+		"name": "tier3Max",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -408,20 +492,7 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
-		"name": "TIER3_MIN",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "TIER3_PRICE",
+		"name": "tier3Min",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -447,6 +518,19 @@ const contractABI = [
 	},
 	{
 		"inputs": [],
+		"name": "TOTAL_SUPPLY",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "usdt",
 		"outputs": [
 			{
@@ -457,7 +541,19 @@ const contractABI = [
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "usdtDecimals",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
-
 export default contractABI;
