@@ -860,7 +860,7 @@ const ERC20ABI = [
 
 const SXBXTokenApp = () => {
   // Contract addresses
-  const sxbxTokenAddress = "0x4955Cc25A751F00a12294c1a1297B067BD5d302C"; // Your SXBX contract address
+  const sxbxTokenAddress = "0x8fb35D11080e44eFCa3295c7190F1F2bBf32Bd37"; // Your SXBX contract address
   
   // State variables
   const [account, setAccount] = useState('');
